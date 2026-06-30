@@ -1,0 +1,164 @@
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-card {
+    max-width: 700px;
+    margin: auto;
+
+    padding: 32px !important;
+
+    background: linear-gradient(
+        145deg,
+        #f0fdf4,
+        #dcfce7
+    );
+
+    border: 1px solid rgba(16,185,129,0.15);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 10px 30px rgba(16,185,129,0.10);
+
+    transition: all 0.25s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-3px);
+}
+
+/* =========================
+   HEADER SECTION
+========================= */
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 72px;
+    height: 72px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #10b981,
+        #059669
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+    color: white;
+
+    flex-shrink: 0;
+}
+
+.profile-header h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #064e3b;
+}
+
+.profile-header p {
+    margin: 0;
+    color: #047857 !important;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.profile-page form {
+    margin-top: 20px;
+}
+
+.profile-page label {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #065f46;
+    font-weight: 600;
+}
+
+.profile-page .form-control {
+    background: #f8fffa !important;
+
+    border: 1px solid #cfe6d6 !important;
+
+    border-radius: 14px;
+
+    padding: 12px 14px;
+
+    color: #064e3b !important;
+
+    transition: all 0.2s ease;
+}
+
+.profile-page .form-control:focus {
+    border-color: #10b981 !important;
+
+    box-shadow:
+        0 0 0 4px rgba(16,185,129,0.15);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.profile-page .btn-primary {
+    margin-top: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #10b981,
+        #059669
+    ) !important;
+
+    border: none !important;
+
+    border-radius: 14px;
+
+    padding: 12px;
+
+    font-weight: 700;
+
+    transition: all 0.2s ease;
+}
+
+.profile-page .btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .profile-page h2 {
+        font-size: 30px;
+    }
+
+    .profile-card {
+        padding: 24px !important;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .avatar {
+        width: 65px;
+        height: 65px;
+    }
+}

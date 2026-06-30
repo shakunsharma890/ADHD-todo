@@ -1,0 +1,171 @@
+ /* =========================
+   FOCUS TIMER PAGE (EDSD GREEN V2)
+========================= */
+
+.focus-page {
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.focus-page h2 {
+    font-size: 40px;
+    font-weight: 800;
+    color: #064e3b;
+    margin-bottom: 6px;
+}
+
+.focus-page .text-muted {
+    color: #047857 !important;
+    font-size: 16px;
+}
+
+/* =========================
+   TIMER (SOFT GREEN CORE)
+========================= */
+
+#timer {
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50% !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 64px;
+    font-weight: 800;
+
+    color: #064e3b;
+
+    background: linear-gradient(
+        145deg,
+        #f0fdf4,
+        #dcfce7
+    );
+
+    border: 6px solid rgba(16,185,129,0.25);
+
+    box-shadow:
+        0 10px 30px rgba(16,185,129,0.10),
+        inset 0 0 25px rgba(255,255,255,0.6);
+
+    margin-bottom: 28px !important;
+
+    transition: all 0.25s ease;
+}
+
+/* subtle hover (no aggressive glow) */
+#timer:hover {
+    transform: scale(1.02);
+    box-shadow:
+        0 12px 35px rgba(16,185,129,0.18);
+}
+
+/* =========================
+   BUTTONS (SOFT GREEN SYSTEM)
+========================= */
+
+.timer-buttons .btn {
+    border: none !important;
+    border-radius: 14px !important;
+    padding: 12px 22px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+/* START */
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+/* PAUSE */
+.btn-warning {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+    color: white !important;
+}
+
+/* RESET */
+.btn-danger {
+    background: linear-gradient(135deg, #f87171, #ef4444) !important;
+}
+
+/* hover */
+.timer-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   SESSION STATS (CLEAN GREEN CARD)
+========================= */
+
+.stats {
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+
+    padding: 26px;
+
+    border-radius: 20px;
+
+    background: #f0fdf4;
+
+    border: 1px solid rgba(16,185,129,0.18);
+
+    box-shadow: 0 8px 24px rgba(16,185,129,0.08);
+
+    text-align: left;
+}
+
+/* headings */
+.stats h3 {
+    color: #064e3b;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* text */
+.stats p {
+    color: #065f46;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+/* divider */
+.stats hr {
+    border-color: rgba(16,185,129,0.15);
+    margin: 18px 0;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    #timer {
+        width: 230px;
+        height: 230px;
+        font-size: 50px;
+    }
+
+    .focus-page h2 {
+        font-size: 30px;
+    }
+
+    .timer-buttons .btn {
+        margin-bottom: 10px;
+    }
+}
+.mode-label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #4CAF50;
+}
