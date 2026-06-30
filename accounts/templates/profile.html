@@ -1,0 +1,144 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-page container-fluid">
+
+    <!-- PAGE TITLE -->
+    <div class="mb-4">
+        <h2>My Profile</h2>
+        <p class="text-muted">Manage your personal information</p>
+    </div>
+
+    <!-- PROFILE CARD -->
+    <div class="card profile-card p-4">
+
+        <!-- HEADER -->
+        <div class="profile-header">
+
+            <div class="avatar">
+                <span>👤</span>
+            </div>
+
+            <div>
+                <h3>{{ user.first_name|default:user.username }}</h3>
+                <p class="text-muted">{{ user.email }}</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <!-- PROFILE INFORMATION -->
+        <div class="profile-info mb-4">
+
+            <h5>Display Name</h5>
+            <p>{{ user.first_name|default:user.username }}</p>
+
+            <h5>Email</h5>
+            <p>{{ user.email }}</p>
+
+            <h5>Bio</h5>
+            <p>
+                {% if profile.bio %}
+                    {{ profile.bio }}
+                {% else %}
+                    No bio added yet.
+                {% endif %}
+            </p>
+
+            <button
+
+                type="button"
+                    
+                id="updateProfileBtn"
+                    
+                class="btn btn-primary">
+                    
+                Update Profile
+                    
+            </button>
+
+        </div>
+
+        <!-- ERROR MESSAGE -->
+        {% if error %}
+            <div class="alert alert-danger mb-3">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <!-- EDIT FORM -->
+        <div id="editForm" style="display:none;">
+
+            <hr>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <label for="name" class="form-label">
+                    Display Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ user.first_name }}"
+                    class="form-control mb-3"
+                >
+
+                <label for="email" class="form-label">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ user.email }}"
+                    class="form-control mb-3"
+                >
+
+                <label for="bio" class="form-label">
+                    Bio
+                </label>
+
+                <textarea
+                    id="bio"
+                    name="bio"
+                    class="form-control mb-3"
+                    rows="4"
+                    placeholder="Write something about yourself..."
+                >{{ profile.bio|default:'' }}</textarea>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100">
+                    Save Changes
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

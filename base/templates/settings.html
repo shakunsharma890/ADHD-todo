@@ -1,0 +1,98 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="settings-page container-fluid">
+
+    <h2 class="mb-3">Settings</h2>
+    <p class="text-muted mb-4">Control your focus system</p>
+    <hr>
+
+    <div class="card p-4">
+
+        <h4 class="mb-4">Focus Timer Settings</h4>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- FOCUS -->
+            <label class="mb-2">Focus Duration (minutes)</label>
+            <input type="number"
+                   name="focus_duration"
+                   value="{{ settings.focus_duration }}"
+                   class="form-control mb-3">
+
+            <!-- BREAK -->
+            <label class="mb-2">Break Duration (minutes)</label>
+            <input type="number"
+                   name="break_duration"
+                   value="{{ settings.break_duration }}"
+                   class="form-control mb-3">
+
+            <!-- CYCLES -->
+            <label class="mb-2">Total Cycles</label>
+            <input type="number"
+                   name="total_cycles"
+                   value="{{ settings.total_cycles }}"
+                   class="form-control mb-3">
+
+            <!-- SOUND TOGGLE -->
+            <div class="setting-item mt-3">
+
+                <span>Timer Sounds</span>
+
+                <label class="switch">
+                    <input type="checkbox" name="sound_enabled"
+                           {% if settings.sound_enabled %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">
+                Save Settings
+            </button>
+        </form>
+
+    </div>
+
+    <hr>
+
+<h5>Account</h5>
+
+<a href="{% url 'change_password' %}"
+
+   class="change-password-btn">
+
+    Change Password
+
+</a>
+
+</div>
+{% endblock %}
+
+{% block script %}
+
+<script>
+    const focusDuration = Number("{{ settings.focus_duration|default:25 }}");
+    const breakDuration = Number("{{ settings.break_duration|default:5 }}");
+    const totalCycles = Number("{{ settings.total_cycles|default:4 }}");
+</script>
+
+
+
+<!-- PROPER JSON SCRIPT -->
+
+<script id="sound-enabled" type="application/json">
+
+    {{ settings.sound_enabled|yesno:"true,false" }}
+
+</script>
+
+<script src="{% static 'js/timer.js' %}"></script>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/setting.css' %}">
+{% endblock %}

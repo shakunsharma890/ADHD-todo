@@ -1,0 +1,177 @@
+/* =========================
+   SETTINGS PAGE (GREEN V2)
+========================= */
+
+.settings-page {
+    min-height: 100vh;
+    padding-top: 20px;
+}
+
+/* TITLE */
+.settings-page h2 {
+    color: #064e3b;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+/* CARD */
+.settings-page .card {
+    max-width: 600px;
+
+    background: linear-gradient(
+        145deg,
+        #f0fdf4,
+        #dcfce7
+    ) !important;
+
+    border: 1px solid rgba(16,185,129,0.18) !important;
+
+    border-radius: 22px !important;
+
+    box-shadow: 0 10px 25px rgba(16,185,129,0.08);
+
+    transition: 0.25s ease;
+}
+
+.settings-page .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(16,185,129,0.12);
+}
+
+/* CARD TITLE */
+.settings-page .card h4 {
+    color: #064e3b;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* LABELS */
+.settings-page label {
+    color: #065f46;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* INPUTS */
+.settings-page .form-control {
+    background: #f8fafc !important;
+    border: 1px solid #cfe6d6 !important;
+    border-radius: 14px !important;
+    color: #064e3b !important;
+    padding: 12px 14px;
+    transition: 0.2s ease;
+}
+
+.settings-page .form-control:focus {
+    border-color: #4caf78 !important;
+    box-shadow: 0 0 0 4px rgba(76,175,120,0.15) !important;
+}
+
+/* BUTTON */
+.settings-page .btn-primary {
+    background: linear-gradient(
+        135deg,
+        #7bcf9b,
+        #4caf78
+    ) !important;
+
+    border: none !important;
+    border-radius: 14px !important;
+    font-weight: 600;
+    padding: 12px 22px;
+}
+
+.settings-page .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(76,175,120,0.25);
+}
+
+/* SWITCH WRAPPER */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+/* HIDE DEFAULT CHECKBOX */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* SLIDER BACKGROUND */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+/* CIRCLE BUTTON */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+/* ON STATE */
+.switch input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+/* MOVE CIRCLE WHEN ON */
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
+}
+/* CHANGE PASSWORD BUTTON */
+
+.change-password-btn {
+    display: inline-block;
+    text-decoration: none;
+
+    background-color: #7FCF9A;
+    color: white;
+
+    padding: 10px 18px;
+    border-radius: 10px;
+
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.change-password-btn:hover {
+    background-color: #6bb986;
+    color: white;
+
+    transform: translateY(-2px);
+
+    text-decoration: none;
+}
+
+.change-password-btn:active {
+    transform: translateY(0);
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .settings-page h2 {
+        font-size: 28px;
+    }
+
+    .settings-page .card {
+        width: 100%;
+    }
+}

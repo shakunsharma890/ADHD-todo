@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+<div class="register-page">
+
+    <div class="register-card">
+
+        <h2>Register</h2>
+
+        <p class="subtitle">
+            Create your account and start focusing
+        </p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="username" placeholder="Username" required>
+
+            <input type="email" name="email" placeholder="Email" required>
+
+            <input type="password" name="password" placeholder="Password" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p class="login-link">
+            Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+        </p>
+
+    </div>
+{% endblock %}
+</div>
+    {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    {% endblock %}

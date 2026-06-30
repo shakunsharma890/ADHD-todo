@@ -1,0 +1,159 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="tasks-page container-fluid">
+
+    <h2 class="mb-3">Task Management</h2>
+    <p class="text-muted mb-4">Organize Your Tasks</p>
+
+    <hr>
+
+    <!-- ADD TASK BUTTON -->
+    <button type="button" class="btn btn-outline-success mb-3" onclick="showForm()">
+        + Add Task
+    </button>
+
+    <!-- FILTER BUTTONS -->
+    <div class="btn-group mb-3" role="group">
+        <a href="{% url 'tasks' %}" class="btn btn-outline-success">All</a>
+        <a href="?filter=pending" class="btn btn-outline-success">Pending</a>
+        <a href="?filter=completed" class="btn btn-outline-success">Completed</a>
+    </div>
+
+    <!-- ADD TASK FORM -->
+    <div id="task-form" style="display:none;" class="card p-3 mb-3 shadow-sm">
+
+        <form method="POST" action="{% url 'tasks' %}  ">
+            {% csrf_token %}
+
+            <h5 class="page-title mb-3">Create New Task</h5>
+
+            <input type="text"
+                   name="title"
+                   placeholder="What do you need to do?"
+                   class="form-control mb-2"
+                   required>
+
+            <textarea
+                name="desc"
+                class="form-control mb-3"
+                rows="4"
+                placeholder="Break down your task into smaller steps..."
+            ></textarea>
+
+            <select name="priority" class="form-control mb-2">
+                <option value="High">High Priority</option>
+                <option value="Medium" selected>Medium Priority</option>
+                <option value="Low">Low Priority</option>
+            </select>
+
+            <input type="date"
+                   name="due_date"
+                   class="form-control mb-3">
+
+            <button type="submit" class="btn btn-success w-100">
+                Save Task
+            </button>
+
+        </form>
+    </div>
+
+    <!-- TASK LIST -->
+    <div class="task-scroll-area" id="task-list">
+
+        {% for task in tasks %}
+
+        <div class="card task-card p-3 mb-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <!-- LEFT SIDE -->
+                <div class="d-flex align-items-start">
+
+                    <!-- CHECKBOX (NO FORM!) -->
+                    <input type="checkbox"
+                           class="task-complete me-3"
+                           data-id="{{ task.id }}"
+                           {% if task.completed %}checked disabled {% endif %}>
+
+                    <div>
+
+                        <strong class="{% if task.completed %}completed-task-text{% endif %}">
+                            {{ task.title }}
+                        </strong>
+                        <!-- CATEGORY LABEL -->
+
+                        {% if task.category %}
+
+                            <span class="category-tag">
+                            
+                                {{ task.category }}
+                            
+                            </span>
+                        
+                        {% endif %}
+
+                        {% if task.taskstep_set.all %}
+                        <ul class="task-steps mt-2">
+                            {% for step in task.taskstep_set.all %}
+                                <li class="step-item">{{ step.step_text }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        {% if task.description %}
+                        <p class="text-muted mt-1 mb-0">
+                            {{ task.description }}
+                        </p>
+                        {% endif %}
+
+                        <small class="text-muted d-block mt-1">
+                            Priority: {{ task.priority }} |
+                            Due: {{ task.due_date|default:"No Date" }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="d-flex align-items-center">
+
+                    <!-- EDIT ONLY FOR ACTIVE TASK -->
+                    {% if not task.completed %}
+                    <a href="{% url 'edit_task' task.id %}"
+                       class="btn btn-sm btn-outline-primary">
+                        Edit
+                    </a>
+                    {% endif %}
+
+                    <!-- DELETE -->
+                    <button type="button"
+                            class="btn btn-sm btn-outline-danger delete-task ms-2"
+                            data-id="{{ task.id }}">
+                        Delete
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/tasks.js' %}"></script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/task.css' %}">
+{% endblock %}

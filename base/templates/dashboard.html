@@ -1,0 +1,199 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="dashboard-page container-fluid">
+
+    <!-- PAGE TITLE -->
+
+        <h2 class="mb-3">Dashboard</h2>
+        <p class="text-muted mb-4">
+            Manage your productivity and tasks
+        </p>
+
+    <hr>
+    <!-- TOP SECTION -->
+    <div class="dashboard-top-row row g-4">
+
+        <!-- STATS CARD -->
+        <div class="col-lg-4">
+
+            <div class="card stats-card p-3 ">
+
+                <h5 class="mb-4">
+                    Daily Focus Stats
+                </h5>
+                <p>
+                    Current Streak:
+                    <strong id = "streakCount">{{ streak }} days 🔥</strong>
+                </p>
+                <p>
+                    Today Focus Time:
+                    <strong>{{ today_focus }} min</strong>
+                </p>
+                
+                <p>
+                    🧠 Brain Dump: <br>
+                    <span id="brainDumpCount">
+                        {{ brain_dump_completed }}/{{ brain_dump_total }}
+                    </span>
+                </p>
+                <div class="progress">
+                    <div
+                        id="brainDumpBar"
+                        class="progress-bar"
+                        role="progressbar"
+                        aria-valuenow="{{ brain_dump_progress }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        data-width="{{ brain_dump_progress }}">
+                    </div>
+                </div>
+                <p>
+                    ✅ Tasks: <br>
+                    <span id="taskCount">
+                        {{ main_task_completed }}/{{ main_task_total }}
+                    </span>
+                </p>
+                <div class="progress">
+                        <div
+                            id="taskBar"
+                            class="progress-bar"
+                            role="progressbar"
+                            aria-valuenow="{{ main_task_progress }}"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            data-width="{{ main_task_progress }}">
+                        </div>
+                    </div>
+                <p>
+                    Total Tasks:
+                    <strong id="totalTasksCount">{{ total_tasks }}</strong>
+                </p>
+                   
+                <hr>
+                    <P>Productivity Snapshot</P>
+                <div class="mt-0.2">
+                    <canvas id="taskChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- QUICK ADD TASK -->
+        <div class="col-lg-8">
+
+            <div class="card quick-task p-3 ">
+
+                <h4 class="mb-2">
+                    Brain Dump
+                </h4>
+
+                <p class="text-muted small mb-3">
+                    Capture up to 5 quick tasks.
+                </p>
+                 <!-- Message Area -->
+                <div id="brainDumpMessage"></div>
+                <form method="POST" id="add-task-form">
+
+                    {% csrf_token %}
+
+                    <!-- TASK NAME -->
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="Quickly capture a task..."
+                        class="form-control mb-3"
+                    >
+                    <!-- BUTTON -->
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+
+                        Add Task
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        
+
+            <!-- TASK SECTION -->
+    <div class="card task-list-wrapper p-4 mt-4">
+
+        <!-- HEADER -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <h4 class="m-0">
+                Brain Dump Tasks
+            </h4>
+
+            <!-- FILTER BUTTONS -->
+            <div class="btn-group" role="group">
+
+            <button
+                type="button"
+                class="btn btn-outline-success filter-btn"
+                data-filter="all">
+                All
+            </button>
+        
+            <button
+                type="button"
+                class="btn btn-outline-success filter-btn"
+                data-filter="pending">
+                Pending
+            </button>
+        
+            <button
+                type="button"
+                class="btn btn-outline-success filter-btn"
+                data-filter="completed">
+                Completed
+            </button>
+        
+        </div>
+
+        </div>
+
+        <hr>
+
+        <!-- SCROLL AREA -->
+        <div class="task-scroll-area" id="task-list">
+
+            {% include "partials/task_list.html" %}
+
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+
+{{ total_tasks|json_script:"totalTasksData" }}
+{{ completed_tasks|json_script:"completedTasksData" }}
+{{ pending_tasks|json_script:"pendingTasksData" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/dashboard.js' %}"></script>
+
+{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+<div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+        <div class="about-header">
+            <h1 class="mb-3">About Lumora</h1>
+            <p class="lead">Lumora is a productivity dashboard designed to help users stay focused, organized, and motivated throughout their daily workflow.</p>
+            <hr>
+            <h3>Our Purpose</h3>
+            <p>
+    Managing tasks, maintaining focus, and tracking productivity can be
+    challenging in today's fast-paced world. Lumora brings these essential
+    tools together in a single, intuitive platform that helps users work
+    more efficiently and achieve their goals.
+</p>
+<h3 class="mt-4">Features</h3>
+<ul>
+    <li>Create, update, and manage daily tasks.</li>
+    <li>Stay productive using the built-in Focus Timer.</li>
+    <li>Track progress through productivity statistics.</li>
+    <li>Organize work with a clean and distraction-free dashboard.</li>
+    <li>Customize settings according to personal preferences.</li>
+</ul>
+<h3 class="mt-4">Technology Stack</h3>
+<p>
+    This application is built using modern web technologies:
+</p>
+<ul>
+    <li>Django (Python Web Framework)</li>
+    <li>HTML5 & CSS3</li>
+    <li>JavaScript</li>
+    <li>Bootstrap</li>
+    <li>SQLite Database</li>
+</ul>
+<h3 class="mt-4">Developer</h3>
+<p>
+    Lumora was developed by <strong>Shakun Sharma</strong> as a productivity
+    management platform and Django learning project. The application
+    demonstrates practical implementation of CRUD operations, template
+    inheritance, responsive user interface design, and productivity-focused
+    features.
+</p>
+<h3 class="mt-4">Our Vision</h3>
+<p>
+    We believe productivity is not about working longer hours—it's about
+    working with clarity, consistency, and purpose. Lumora aims to provide
+    users with the tools they need to build better habits and make meaningful
+    progress every day.
+</p>
+<p>
+    Inspired by the ideas of clarity, focus, and growth, the name
+    <strong>Lumora</strong> represents turning intention into action and
+    transforming everyday effort into meaningful progress.
+</p>
+</div>
+</div>
+</div>
+</div>
+{% endblock %} 
+
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+<div class="about-header">
+    <h1>Productivity Summary</h1>
+    <p class="lead">
+        Review your progress, achievements, and productivity insights.
+    </p>
+</div>
+
+<div class="card">
+    <h3>Overview</h3>
+    <p>
+        Welcome to your productivity summary. This dashboard provides a
+        snapshot of your focus sessions, task completion, and overall
+        productivity trends.
+    </p>
+</div>
+
+<div class="card mt-4">
+    <h3>Focus Sessions</h3>
+    <p>
+        Total focus sessions completed:
+        <strong>{{ total_sessions }}</strong>
+    </p>
+
+    <p>
+        Total focus time:
+        <strong>{{ total_focus_time }}</strong>
+    </p>
+</div>
+
+<div class="card mt-4">
+    <h3>Tasks</h3>
+
+    <p>
+        Completed Tasks:
+        <strong>{{ completed_tasks }}</strong>
+    </p>
+
+    <p>
+        Pending Tasks:
+        <strong>{{ pending_tasks }}</strong>
+    </p>
+</div>
+
+<div class="card mt-4">
+    <h3>Performance Insight</h3>
+
+    <p>
+        Consistent effort creates long-term results. Review your progress,
+        celebrate completed work, and identify areas where you can improve
+        focus and productivity.
+    </p>
+</div>
+</div>
+{% endblock %}
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+{% endblock %}

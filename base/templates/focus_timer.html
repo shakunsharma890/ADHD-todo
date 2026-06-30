@@ -1,0 +1,87 @@
+    {% extends 'main.html' %}
+
+    {% load static %}
+    
+    {% block content %}
+    <center>
+        <div class="focus-page container-fluid">
+        
+            <h2 class="mb-3">Focus Timer</h2>
+            <p class="text-muted mb-4">Stay Focus</p>
+             <hr>
+
+            <!-- 🔥 MODE LABEL (IMPORTANT ADDITION) -->
+             <div id="modeLabel" class="mode-label">
+                Focus Time 🎯
+            </div>
+            <!-- Timer Display -->
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <div id="timer" class=" ">
+                    25:00
+                </div>
+            
+                <!-- Buttons -->
+                <div class="timer-buttons">
+                
+                    <button class="btn btn-success me-2" onclick="startTimer()">
+                        Start
+                    </button>
+                
+                    <button class="btn btn-warning me-2" onclick="pauseTimer()">
+                        Pause
+                    </button>
+                
+                    <button class="btn btn-danger" onclick="resetTimer()">
+                        Reset
+                    </button>
+                
+                </div>
+            
+            </div>
+
+            <!--Session timing-->
+            <div class="row mt-5">
+
+                <div class="col-12">
+                
+                    <div class="stats" id="focus-stats">
+
+                        <h3>Today</h3>
+                        <p>Sessions: {{ today_sessions|default:0 }}</p>
+                        <p>Focus Time: {{ today_focus|default:0 }} min</p>
+
+                        <hr>
+
+                        <h3>This Week</h3>
+                        <p>Sessions: {{ week_sessions|default:0 }}</p>
+                        <p>Focus Time: {{ week_hours|default:0 }}h {{ week_minutes|default:0 }}m</p>
+
+                    </div>
+                </div>
+            
+            </div>
+        
+        </div>
+    </center>
+
+    {% endblock %}
+
+    {% block script %}
+        {{ settings.sound_enabled|json_script:"sound-enabled" }}
+
+        <script>
+            const focusDuration = Number("{{ settings.focus_duration|default:25 }}");
+        
+            const breakDuration = Number("{{ settings.break_duration|default:5 }}");
+        
+            const totalCycles = Number("{{ settings.total_cycles|default:4 }}");
+        
+        </script>
+
+        <script src="{% static 'js/timer.js' %}"></script>
+
+    {% endblock %}
+
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'css/focus.css' %}">
+    {% endblock %}

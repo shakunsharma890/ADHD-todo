@@ -1,0 +1,186 @@
+    {% extends 'main.html' %}
+
+    {% load static %}
+    
+    {% block content %}
+    <div class="bento-container">
+        <div class="streak-card">
+
+    <div class="streak-header">
+
+        <button class="month-btn">
+            ←
+        </button>
+
+        <h4>{{ current_month }}</h4>
+
+        <button class="month-btn">
+            →
+        </button>
+
+    </div>
+
+    <div class="streak-badge">
+        🔥 {{ streak }} Day Streak
+    </div>
+
+    <!-- Weekday Names -->
+    <div class="calendar-grid weekday-row">
+
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+        <div>Sun</div>
+
+    </div>
+
+    <!-- Calendar -->
+    <div class="calendar-grid">
+
+        {% for day in month_days %}
+
+            <div class="day-box">
+
+                {% if day.completed %}
+                    <div class="circle completed">🔥</div>
+
+                {% elif day.is_today %}
+                    <div class="circle today"></div>
+
+                {% else %}
+                    <div class="circle"></div>
+
+                {% endif %}
+
+                <small>{{ day.date.day }}</small>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+        
+          
+          <!-- 1. HERO BOX (Today Focus) -->
+          <div class="bento-card focus-hero">
+            <div class="card-header">🎯 TODAY'S FOCUS</div>
+            <div class="hero-content">
+              <h1 class="hero-number">
+                {{ today_focus }} <span class="unit">min</span>
+              </h1>
+              <p class="subtext">
+                {{ today_sessions }} sessions completed today
+              </p>
+            </div>
+          </div>
+        
+          <!-- 2. TASK BOX -->
+          <div class="bento-card task-box">
+            <div class="card-header">📋 TASKS</div>
+        
+            <div class="task-stats-vertical">
+              <div class="stat-row">
+                <span>Total:</span> <strong>{{ total_tasks }}</strong>
+              </div>
+            
+              <div class="stat-row">
+                <span>Planned:</span> <strong>{{ planned_tasks }}</strong>
+              </div>
+            
+              <div class="stat-row">
+                <span>Pending:</span> <strong>{{ pending_tasks }}</strong>
+              </div>
+            
+              <div class="stat-row highlight">
+                <span>Completed:</span> <strong>{{ completed_tasks }}</strong>
+              </div>
+            </div>
+          </div>
+        
+          <!-- 3. WEEK / MONTH / TOTAL SESSIONS -->
+          <div class="bento-card small-box week-card">
+            <div class="card-header">THIS WEEK</div>
+            <h2>{{ week_focus }} <span class="unit">min</span></h2>
+          </div>
+        
+          <div class="bento-card small-box month-card">
+            <div class="card-header">THIS MONTH</div>
+            <h2>{{ month_focus }} <span class="unit">min</span></h2>
+          </div>
+        
+          <div class="bento-card small-box">
+            <div class="card-header">TOTAL SESSIONS</div>
+            <h2>{{ total_focus_sessions }}</h2>
+          </div>
+        
+          <!-- 4. BRAIN DUMP -->
+          <div class="bento-card brain-card">
+            <div class="card-header">🧠 UNPLANNED IDEAS (BRAIN DUMP)</div>
+        
+            <div class="brain-dump-content">
+              <h2>{{ brain_dump_tasks }}</h2>
+              <p class="subtext">ideas waiting to be processed</p>
+            </div>
+          </div>
+          <div class="bento-card achievement-card">
+
+    <div class="card-header">
+        🏆 ACHIEVEMENTS
+    </div>
+
+    <h3>{{ streak }} Day Streak</h3>
+
+    <p>Your best consistency so far.</p>
+
+</div>
+<div class="chart-card">
+
+    <h4>Task Progress</h4>
+
+    <canvas id="taskChart"></canvas>
+
+</div>
+        </div>
+
+    {% endblock %}
+
+    {% block script %}
+        
+        <!-- Chart.js -->
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js?v=2"></script>
+
+        <!-- Pass Django data to JS -->
+            
+        <script>
+            const totalTasks = Number("{{ total_tasks }}");
+            const completedTasks = Number("{{ completed_tasks }}");
+            const pendingTasks = Number("{{ pending_tasks }}");
+
+            const todayFocus = Number("{{ today_focus }}");
+            const weekFocus = Number("{{ week_focus }}");
+            const monthFocus = Number("{{ month_focus }}");
+
+            const todaySessions = Number("{{ today_sessions }}");
+            const weekSessions = Number("{{ week_sessions }}");
+            const monthSessions = Number("{{ month_sessions }}");
+
+            const totalFocusSessions = Number("{{ total_focus_sessions }}");
+        </script>
+        
+        <!-- External JS -->
+        
+        <script src="{% static 'js/stats.js' %}?v=2"></script>
+        
+
+        
+    {% endblock %}
+
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'css/stats.css' %}">
+    {% endblock %}
