@@ -10,3 +10,4 @@ scikit-learn==1.9.0
 scipy==1.17.1
 sqlparse==0.5.5
 threadpoolctl==3.6.0
+whitenoise==6.12.0
